@@ -15,4 +15,13 @@ public class ProdutoDao {
         this.em.persist(produto);
     }
 
+    public void atualizar(Produto produto) {
+        this.em.merge(produto);
+    }
+
+    public void deletar(Produto produto) {
+        produto = this.em.merge(produto);
+        this.em.remove(produto);
+    }
+
 }
