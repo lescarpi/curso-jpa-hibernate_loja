@@ -1,6 +1,8 @@
 package br.com.loja.testes;
 
+import br.com.loja.dao.ProdutoDao;
 import br.com.loja.modelo.Produto;
+import br.com.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -12,15 +14,15 @@ public class CadastroDeProduto {
     public static void main(String[] args) {
 
         Produto celular = new Produto();
-        celular.setNome("Samsung");
-        celular.setDescricao("S10");
-        celular.setPreco(new BigDecimal("1800"));
+        celular.setNome("Xiaomi REDMI 9");
+        celular.setDescricao("Legal");
+        celular.setPreco(new BigDecimal("2200"));
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
+        ProdutoDao produtoDao = new ProdutoDao(em);
 
         em.getTransaction().begin();
-        em.persist(celular);
+        produtoDao.cadastrar(celular);
         em.getTransaction().commit();
         em.close();
     }
