@@ -36,6 +36,10 @@ public class ItemPedido {
         return id;
     }
 
+    public BigDecimal getValor() {
+        return this.precoUnitario.multiply(new BigDecimal(this.quantidade));
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

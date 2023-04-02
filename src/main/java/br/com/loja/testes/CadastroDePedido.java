@@ -8,7 +8,10 @@ import br.com.loja.modelo.ItemPedido;
 import br.com.loja.modelo.Pedido;
 import br.com.loja.modelo.Produto;
 import br.com.loja.util.JPAUtil;
+import br.com.loja.vo.RelatorioDeVendasVo;
 import jakarta.persistence.EntityManager;
+
+import java.util.List;
 
 public class CadastroDePedido {
 
@@ -16,7 +19,7 @@ public class CadastroDePedido {
 
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDao produtoDao = new ProdutoDao(em);
-        Produto produto = produtoDao.buscarPorId(1L);
+        Produto produto = produtoDao.buscarPorId(2L);
 
         em.getTransaction().begin();
 
@@ -24,12 +27,16 @@ public class CadastroDePedido {
         Cliente cliente = clienteDao.buscarPorId(1L);
 
         Pedido pedido = new Pedido(cliente);
-        pedido.adicionarItem(new ItemPedido(3, produto, pedido));
+        pedido.adicionarItem(new ItemPedido(15, produto, pedido));
 
         PedidoDao pedidoDao = new PedidoDao(em);
         pedidoDao.cadastrar(pedido);
 
         em.getTransaction().commit();
+
+        List<RelatorioDeVendasVo> listaRelatorio = pedidoDao.relatorioVendas();
+        listaRelatorio.forEach(System.out::println);
+
 
     }
 
