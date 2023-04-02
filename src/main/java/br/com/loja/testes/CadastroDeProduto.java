@@ -1,8 +1,10 @@
 package br.com.loja.testes;
 
-import br.com.loja.dao.CategoriaDAO;
+import br.com.loja.dao.CategoriaDao;
+import br.com.loja.dao.ClienteDao;
 import br.com.loja.dao.ProdutoDao;
 import br.com.loja.modelo.Categoria;
+import br.com.loja.modelo.Cliente;
 import br.com.loja.modelo.Produto;
 import br.com.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -28,7 +30,11 @@ public class CadastroDeProduto {
 
         EntityManager em = JPAUtil.getEntityManager();
         ProdutoDao produtoDao = new ProdutoDao(em);
-        CategoriaDAO categoriaDAO = new CategoriaDAO(em);
+        CategoriaDao categoriaDAO = new CategoriaDao(em);
+
+        Cliente cliente = new Cliente("Lucas", "52386432175");
+        ClienteDao clienteDao = new ClienteDao(em);
+        clienteDao.cadastrar(cliente);
 
         em.getTransaction().begin();
 

@@ -3,11 +3,11 @@ package br.com.loja.dao;
 import br.com.loja.modelo.Categoria;
 import jakarta.persistence.EntityManager;
 
-public class CategoriaDAO {
+public class CategoriaDao {
 
     private EntityManager em;
 
-    public CategoriaDAO(EntityManager em) {
+    public CategoriaDao(EntityManager em) {
         this.em = em;
     }
 
